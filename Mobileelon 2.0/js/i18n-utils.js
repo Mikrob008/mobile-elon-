@@ -80,6 +80,25 @@ const i18n = (() => {
     });
   }
 
+  function updateSwitcherUI(lang) {
+    const langSwitcher = document.querySelector('.lang-switcher');
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+    const langLabel = document.getElementById('langLabel');
+    const langFlag = document.getElementById('langFlag');
+    if (!langDropdown) return;
+    const btn = langDropdown.querySelector(`[data-lang="${lang}"]`);
+    if (btn && langLabel) {
+      langLabel.textContent = btn.textContent.trim();
+    }
+    if (btn && langFlag && btn.dataset.flag) {
+      langFlag.src = btn.dataset.flag;
+      langFlag.alt = lang.toUpperCase();
+    }
+    if (langSwitcher) langSwitcher.classList.remove('open');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  }
+
   // ===== ПУБЛИЧНЫЙ API =====
 
   return {
@@ -115,6 +134,7 @@ const i18n = (() => {
     async setLanguage(lang) {
       if (currentLang === lang) {
         console.log(`ℹ️ Язык уже установлен на '${lang}'`);
+        updateSwitcherUI(lang);
         return;
       }
 
@@ -127,6 +147,7 @@ const i18n = (() => {
         console.warn('⚠️ Не удалось сохранить язык в localStorage:', e);
       }
       
+      updateSwitcherUI(lang);
       notifyListeners(lang);
     },
 
@@ -191,6 +212,21 @@ const i18n = (() => {
         elements = [elements];
       }
 
+      const updateElementText = (el, text) => {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = text;
+          return;
+        }
+        if (el.children && el.children.length > 0) {
+          const target = el.querySelector('[data-i18n-text], .i18n-text, .btn-label, .chat-label');
+          if (target) {
+            target.textContent = text;
+            return;
+          }
+        }
+        el.textContent = text;
+      };
+
       elements.forEach(container => {
         // Найти элементы с data-i18n атрибутом
         const translatable = container.querySelectorAll('[data-i18n]');
@@ -199,11 +235,7 @@ const i18n = (() => {
           const key = el.getAttribute('data-i18n');
           if (key) {
             const text = this.get(key);
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-              el.placeholder = text;
-            } else {
-              el.textContent = text;
-            }
+            updateElementText(el, text);
           }
         });
 
@@ -247,23 +279,50 @@ const i18n = (() => {
      * (Интеграция с header.js)
      */
     initSwitcher() {
-      const langBtn = document.getElementById('langBtn');
-      const langDropdown = document.getElementById('langDropdown');
+      let attempts = 0;
+      const init = () => {
+        const langSwitcher = document.querySelector('.lang-switcher');
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
 
-      if (!langBtn || !langDropdown) {
-        console.warn('⚠️ Элементы переключателя языка не найдены');
-        return;
-      }
+        if (!langBtn || !langDropdown || !langSwitcher) {
+          attempts += 1;
+          if (attempts < 30) {
+            setTimeout(init, 100);
+            return;
+          }
+          console.warn('⚠️ Элементы переключателя языка не найдены');
+          return;
+        }
 
-      langDropdown.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        langBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          const lang = btn.getAttribute('data-lang');
-          if (lang) {
-            this.setLanguage(lang);
+          e.stopPropagation();
+          const isOpen = langSwitcher.classList.toggle('open');
+          langBtn.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        langDropdown.querySelectorAll('button').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const lang = btn.getAttribute('data-lang');
+            if (lang) {
+              this.setLanguage(lang);
+            }
+          });
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!langSwitcher.contains(e.target)) {
+            langSwitcher.classList.remove('open');
+            langBtn.setAttribute('aria-expanded', 'false');
           }
         });
-      });
+
+        updateSwitcherUI(this.getLanguage());
+      };
+      init();
     }
   };
 })();
@@ -273,6 +332,9 @@ const i18n = (() => {
 document.addEventListener('DOMContentLoaded', async () => {
   // Инициализируем систему
   await i18n.init();
+
+  // Инициализируем переключатель языка
+  i18n.initSwitcher();
   
   // Обновляем DOM
   i18n.updateDOM(document.body);

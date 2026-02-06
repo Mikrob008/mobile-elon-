@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="location-user">
               <button class="main-btn-location-user" data-modal-target="locationModal" data-i18n="location_all_country">
                 <svg class="icon-location" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 -960 960 960" fill="white"><path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
-                <span class="i18n-text" data-i18n-text>Р’СЃСЏ СЃС‚СЂР°РЅР°</span>
+                <span class="i18n-text" data-i18n="location_all_country">Вся страна</span>
               </button>
 
               <div class="modal-overlay-location" id="locationModal" style="display:none;">
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="delivery">
               <a class="ads-delivery" href="#" data-modal-target="deliveryModal" data-i18n="delivery_link">
                 <svg class="icon-delivery" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 -960 960 960" fill="white"><path d="M280-160q-50 0-85-35t-35-85H60l18-80h113q17-19 40-29.5t49-10.5q26 0 49 10.5t40 29.5h167l84-360H182l4-17q6-28 27.5-45.5T264-800h456l-37 160h117l120 160-40 200h-80q0 50-35 85t-85 35q-50 0-85-35t-35-85H400q0 50-35 85t-85 35Zm357-280h193l4-21-74-99h-95l-28 120Zm-19-273 2-7-84 360 2-7 34-146 46-200ZM20-427l20-80h220l-20 80H20Zm80-146 20-80h260l-20 80H100Zm180 333q17 0 28.5-11.5T320-280q0-17-11.5-28.5T280-320q-17 0-28.5 11.5T240-280q0 17 11.5 28.5T280-240Zm400 0q17 0 28.5-11.5T720-280q0-17-11.5-28.5T680-320q-17 0-28.5 11.5T640-280q0 17 11.5 28.5T680-240Z"/></svg>
-                <span class="i18n-text" data-i18n-text>Р”РѕСЃС‚Р°РІРєР°</span>
+                <span class="i18n-text" data-i18n="delivery_link">Доставка</span>
               </a>
             </div>
           </div>
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="catalog-search-group">
           <button class="catalog-btn" data-i18n="${catalogI18n}">
             <svg class="icon-catalog" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="white"><rect x="2" y="4" width="16" height="2" rx="1"/><rect x="2" y="9" width="16" height="2" rx="1"/><rect x="2" y="14" width="16" height="2" rx="1"/></svg>
-            <span class="i18n-text" data-i18n-text></span>
+            <span class="i18n-text" data-i18n="${catalogI18n}"></span>
           </button>
           <form class="search-form" action="#" method="get">
             <input type="text" class="search-input" placeholder="РџРѕРёСЃРє..." name="q" data-i18n-placeholder="search_placeholder" />
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M3 21c0-4.418 4.03-8 9-8s9 3.582 9 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span class="btn-label" data-i18n-text>Р’С…РѕРґ</span>
+            <span class="btn-label" data-i18n="login_button">Вход</span>
           </button>
         </div>
         <div class="user-profile" id="headerUser" style="display:none;">
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="header-actions-right">
           <button class="btn-header-chat" data-modal-target="chatModal" data-i18n="chat_button" title="Р§Р°С‚">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240l-160 160Zm126-240h594v-480H160v525l46-45Z"/></svg>
-            <span class="chat-label" data-i18n-text>Р§Р°С‚</span>
+            <span class="chat-label" data-i18n="chat_button">Чат</span>
           </button>
           <button class="btn-submit-ads" data-modal-target="authModal" data-i18n="submit_ads_button">
             <svg class="icon-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 -960 960 960" fill="white"><path d="M440-440H200q-17 0-28.5-11.5T160-480q0-17 11.5-28.5T200-520h240v-240q0-17 11.5-28.5T480-800q17 0 28.5 11.5T520-760v240h240q17 0 28.5 11.5T800-480q0 17-11.5 28.5T760-440H520v240q0 17-11.5 28.5T480-160q-17 0-28.5-11.5T440-200v-240Z"/></svg>

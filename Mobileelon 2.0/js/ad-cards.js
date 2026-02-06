@@ -149,10 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function seedOneDefaultAdIfEmpty() {
-    const current = getSubmittedAds();
-    if (current.length > 0) return current;
     const now = Date.now();
-    const seeded = [{
+    return [{
       category: 'smartphones',
       title: 'Xiaomi Redmi Note 13, 8/256',
       price: 2799000,
@@ -164,8 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
       status: 'published',
       location: ''
     }];
-    saveSubmittedAds(seeded);
-    return seeded;
   }
 
   function getDemoAdsIfEmpty() {
@@ -187,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const ads = getSubmittedAds();
+  const ads = getSubmittedAds().filter(ad => ad && ad.status !== 'hidden');
   if (ads.length > 0) {
     renderAdList(listContainer, ads.slice(-24).reverse());
   } else {
@@ -197,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // РћР±РЅРѕРІР»СЏРµРј С†РµРЅС‹/С‚РµРєСЃС‚С‹ РїСЂРё СЃРјРµРЅРµ СЏР·С‹РєР°
   window.addEventListener('languagechange', () => {
-    const current = getSubmittedAds();
+    const current = getSubmittedAds().filter(ad => ad && ad.status !== 'hidden');
     const list = current.length ? current : seedOneDefaultAdIfEmpty();
     renderAdList(listContainer, list);
   });
