@@ -1,0 +1,20 @@
+{
+  "partTypes": [
+    "Дисплеи", "Батареи", "Камеры", "Динамики", "Микрофоны", "Шлейфы", "Корпуса", "Кнопки", "Разъемы зарядки", "Материнские платы"
+  ],
+  "brands": ["Samsung", "Apple", "Xiaomi", "Huawei", "OnePlus", "Google", "Sony", "Oppo", "Vivo", "Realme"],
+  "modelsByBrand": {
+    "Samsung": ["Galaxy S24", "Galaxy S24+", "Galaxy S24 Ultra", "Galaxy A55", "Galaxy A35"],
+    "Apple": ["iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max", "iPhone 14"],
+    "Xiaomi": ["Redmi Note 13", "Redmi Note 13 Pro", "Mi 14", "Mi 14 Pro", "Redmi 12"],
+    "Huawei": ["P60 Pro", "Mate 60", "Nova 12", "P50 Pro", "Mate 50"],
+    "OnePlus": ["OnePlus 12", "OnePlus 11", "OnePlus Nord 3", "OnePlus 10T"],
+    "Google": ["Pixel 8", "Pixel 8 Pro", "Pixel 7a", "Pixel 7"],
+    "Sony": ["Xperia 1 V", "Xperia 5 V", "Xperia 10 V"],
+    "Oppo": ["Find X7", "Reno 11", "A98", "A78"],
+    "Vivo": ["V30", "V29", "Y100", "X100"],
+    "Realme": ["GT 5", "C67", "Note 50", "11 Pro"]
+  }
+}
+
+

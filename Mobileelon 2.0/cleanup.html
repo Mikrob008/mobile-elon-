@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Очистка объявлений</title>
+</head>
+<body>
+    <h1>Очистка объявлений...</h1>
+    <script>
+        // Получаем текущие объявления
+        const raw = localStorage.getItem('submitted_ads');
+        let ads = [];
+        try {
+            ads = raw ? JSON.parse(raw) : [];
+        } catch(e) {
+            ads = [];
+        }
+        
+        // Оставляем только первое объявление
+        if (ads.length > 1) {
+            const firstAd = ads[0];
+            localStorage.setItem('submitted_ads', JSON.stringify([firstAd]));
+            console.log('Оставлено объявлений: 1 из ' + ads.length);
+            document.body.innerHTML = '<h2> Успешно! Оставлено 1 объявление из ' + ads.length + '</h2>';
+        } else if (ads.length === 1) {
+            document.body.innerHTML = '<h2> У вас уже 1 объявление</h2>';
+        } else {
+            document.body.innerHTML = '<h2> Объявлений нет</h2>';
+        }
+    </script>
+</body>
+</html>

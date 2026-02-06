@@ -1,0 +1,67 @@
+/* Базовые медиазапросы для адаптации */
+
+@media (max-width: 1200px) {
+  .container-top-control-panel,
+  .main-header {
+    max-width: 1000px;
+    padding: 0 20px;
+  }
+}
+
+
+ /* Для планшетов */
+@media (max-width: 900px) {
+  .container-top-control-panel,
+  .main-header,
+  main {
+    max-width: 100%;
+    padding: 0 12px;
+  }
+  .top-control {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    gap: 10px;
+  }
+  .categories {
+    gap: 10px;
+  }
+}
+
+/* Для мобильных */
+@media (max-width: 600px) {
+  .container-top-control-panel,
+  .main-header,
+  main {
+    padding: 0 5px;
+  }
+  .top-control {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    gap: 8px;
+    padding: 8px 0;
+  }
+  .categories {
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+  .main-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .main-header,
+  .container-top-control-panel {
+    padding: 0 2px;
+  }
+  .main-btn-location-user,
+  #langBtn {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+}
